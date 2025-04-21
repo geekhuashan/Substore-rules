@@ -27,7 +27,11 @@ config.outbounds.map(i => {
     }
     // 美国手动组
     if (['🇺🇸 美国手动'].includes(i.tag)) {
-        i.outbounds.push(...getTags(proxies, /美|us|unitedstates|united states|States|🇺🇸/i))
+        i.outbounds.push(...getTags(proxies, /美|us|unitedstates|united states|States|��🇸/i))
+    }
+    // ISP节点
+    if (['📶 ISP 节点'].includes(i.tag)) {
+        i.outbounds.push(...getTags(proxies, /ISP|isp|直连/i))
     }
     // 香港节点
     if (['🇭🇰 香港自动'].includes(i.tag)) {
