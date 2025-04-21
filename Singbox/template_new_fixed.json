@@ -690,7 +690,7 @@
         "tag": "geosite-huashan",
         "type": "remote",
         "format": "binary",
-        "url": "https://testingcf.jsdelivr.net/gh/geekhuashan/Rules@main/SingBox/geosite/huashan.srs",
+        "url": "https://testingcf.jsdelivr.net/gh/geekhuashan/Proxy-Rules@main/sing-box/huashan.json",
         "download_detour": "direct"
       }
     ]
