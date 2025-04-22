@@ -82,6 +82,15 @@ config.outbounds.forEach(outbound => {
     }
 });
 
+// 确保路由有final字段，设置为Proxy作为漏网之鱼
+if (!config.route) {
+    config.route = {};
+}
+// 设置final为Proxy，确保所有未匹配的请求都走代理
+config.route.final = "Proxy";
+// 确保auto_detect_interface为true
+config.route.auto_detect_interface = true;
+
 $content = JSON.stringify(config, null, 2)
 
 function getTags(proxies, regex) {
