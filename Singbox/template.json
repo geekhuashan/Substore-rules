@@ -104,80 +104,84 @@
       "tag": "Domestic",
       "type": "selector",
       "outbounds": [
+        "Auto - UrlTest",
         "direct",
-        "🇭🇰 香港自动",
-        "🇨🇳 台湾自动",
-        "🇸🇬 狮城自动",
-        "🇯🇵 日本自动",
         "Selector",
         "📶 ISP 节点",
-        "Proxy"
+        "🇺🇸 美国手动",
+        "🇭🇰 香港自动",
+        "🇨🇳 台湾自动",
+        "🇯🇵 日本自动",
+        "🇸🇬 狮城自动",
+        "🇺🇲 美国自动",
+        "🇰🇷 韩国自动"
       ]
     },
     {
       "tag": "AI Suite",
       "type": "selector",
       "outbounds": [
-        "Proxy",
         "Auto - UrlTest",
-        "🇸🇬 狮城自动",
+        "direct",
+        "Selector",
+        "📶 ISP 节点",
+        "🇺🇸 美国手动",
         "🇭🇰 香港自动",
         "🇨🇳 台湾自动",
         "🇯🇵 日本自动",
+        "🇸🇬 狮城自动",
         "🇺🇲 美国自动",
-        "🇰🇷 韩国自动",
-        "🇺🇸 美国手动",
-        "Selector",
-        "📶 ISP 节点",
-        "direct"
+        "🇰🇷 韩国自动"
       ]
     },
     {
       "tag": "YouTube",
       "type": "selector",
       "outbounds": [
-        "Proxy",
-        "🇸🇬 狮城自动",
+        "Auto - UrlTest",
+        "direct",
+        "Selector",
+        "📶 ISP 节点",
+        "🇺🇸 美国手动",
         "🇭🇰 香港自动",
         "🇨🇳 台湾自动",
         "🇯🇵 日本自动",
+        "🇸🇬 狮城自动",
         "🇺🇲 美国自动",
-        "🇰🇷 韩国自动",
-        "🇺🇸 美国手动",
-        "Selector",
-        "📶 ISP 节点",
-        "direct"
+        "🇰🇷 韩国自动"
       ]
     },
     {
       "tag": "Netflix",
       "type": "selector",
       "outbounds": [
-        "Proxy",
-        "🇸🇬 狮城自动",
+        "Auto - UrlTest",
+        "direct",
+        "Selector",
+        "📶 ISP 节点",
+        "🇺🇸 美国手动",
         "🇭🇰 香港自动",
         "🇨🇳 台湾自动",
         "🇯🇵 日本自动",
+        "🇸🇬 狮城自动",
         "🇺🇲 美国自动",
-        "🇰🇷 韩国自动",
-        "🇺🇸 美国手动",
-        "Selector",
-        "📶 ISP 节点",
-        "direct"
+        "🇰🇷 韩国自动"
       ]
     },
     {
       "tag": "Apple",
       "type": "selector",
       "outbounds": [
-        "Proxy",
-        "🇺🇸 美国手动",
+        "Auto - UrlTest",
+        "direct",
         "Selector",
         "📶 ISP 节点",
+        "🇺🇸 美国手动",
         "🇭🇰 香港自动",
         "🇨🇳 台湾自动",
         "🇯🇵 日本自动",
         "🇸🇬 狮城自动",
+        "🇺🇲 美国自动",
         "🇰🇷 韩国自动"
       ]
     },
@@ -185,35 +189,34 @@
       "tag": "Microsoft",
       "type": "selector",
       "outbounds": [
+        "Auto - UrlTest",
         "direct",
-        "Proxy",
-        "🇺🇲 美国自动",
+        "Selector",
+        "📶 ISP 节点",
+        "🇺🇸 美国手动",
         "🇭🇰 香港自动",
         "🇨🇳 台湾自动",
-        "🇸🇬 狮城自动",
         "🇯🇵 日本自动",
-        "🇰🇷 韩国自动",
-        "🇺🇸 美国手动",
-        "Selector",
-        "📶 ISP 节点"
+        "🇸🇬 狮城自动",
+        "🇺🇲 美国自动",
+        "🇰🇷 韩国自动"
       ]
     },
     {
       "tag": "Google Search",
       "type": "selector",
       "outbounds": [
-        "Proxy",
         "Auto - UrlTest",
-        "🇺🇲 美国自动",
-        "🇭🇰 香港自动",
-        "🇨🇳 台湾自动",
-        "🇸🇬 狮城自动",
-        "🇯🇵 日本自动",
-        "🇰🇷 韩国自动",
-        "🇺🇸 美国手动",
+        "direct",
         "Selector",
         "📶 ISP 节点",
-        "direct"
+        "🇺🇸 美国手动",
+        "🇭🇰 香港自动",
+        "🇨🇳 台湾自动",
+        "🇯🇵 日本自动",
+        "🇸🇬 狮城自动",
+        "🇺🇲 美国自动",
+        "🇰🇷 韩国自动"
       ]
     },
     {
@@ -237,53 +240,51 @@
       "tag": "Gaming",
       "type": "selector",
       "outbounds": [
+        "Auto - UrlTest",
         "direct",
-        "Proxy",
-        "🇺🇲 美国自动",
+        "Selector",
+        "📶 ISP 节点",
+        "🇺🇸 美国手动",
         "🇭🇰 香港自动",
         "🇨🇳 台湾自动",
-        "🇸🇬 狮城自动",
         "🇯🇵 日本自动",
-        "🇰🇷 韩国自动",
-        "🇺🇸 美国手动",
-        "Selector",
-        "📶 ISP 节点"
+        "🇸🇬 狮城自动",
+        "🇺🇲 美国自动",
+        "🇰🇷 韩国自动"
       ]
     },
     {
       "tag": "Crypto",
       "type": "selector",
       "outbounds": [
-        "Proxy",
         "Auto - UrlTest",
-        "🇸🇬 狮城自动",
+        "direct",
+        "Selector",
+        "📶 ISP 节点",
+        "🇺🇸 美国手动",
         "🇭🇰 香港自动",
         "🇨🇳 台湾自动",
         "🇯🇵 日本自动",
+        "🇸🇬 狮城自动",
         "🇺🇲 美国自动",
-        "🇰🇷 韩国自动",
-        "🇺🇸 美国手动",
-        "Selector",
-        "📶 ISP 节点",
-        "direct"
+        "🇰🇷 韩国自动"
       ]
     },
     {
       "tag": "Talkatone",
       "type": "selector",
       "outbounds": [
-        "Proxy",
         "Auto - UrlTest",
-        "🇺🇲 美国自动",
-        "🇭🇰 香港自动",
-        "🇨🇳 台湾自动",
-        "🇸🇬 狮城自动",
-        "🇯🇵 日本自动",
-        "🇰🇷 韩国自动",
-        "🇺🇸 美国手动",
+        "direct",
         "Selector",
         "📶 ISP 节点",
-        "direct"
+        "🇺🇸 美国手动",
+        "🇭🇰 香港自动",
+        "🇨🇳 台湾自动",
+        "🇯🇵 日本自动",
+        "🇸🇬 狮城自动",
+        "🇺🇲 美国自动",
+        "🇰🇷 韩国自动"
       ]
     },
     {
@@ -309,14 +310,16 @@
       "type": "selector",
       "outbounds": [
         "Auto - UrlTest",
-        "Selector",
         "direct",
-        "Proxy",
-        "🇺🇲 美国自动",
+        "Selector",
+        "📶 ISP 节点",
+        "🇺🇸 美国手动",
         "🇭🇰 香港自动",
         "🇨🇳 台湾自动",
+        "🇯🇵 日本自动",
         "🇸🇬 狮城自动",
-        "🇯🇵 日本自动"
+        "🇺🇲 美国自动",
+        "🇰🇷 韩国自动"
       ]
     },
     {
