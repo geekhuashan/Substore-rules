@@ -305,6 +305,21 @@
       ]
     },
     {
+      "tag": "Fallback",
+      "type": "selector",
+      "outbounds": [
+        "Auto - UrlTest",
+        "Selector",
+        "direct",
+        "Proxy",
+        "🇺🇲 美国自动",
+        "🇭🇰 香港自动",
+        "🇨🇳 台湾自动",
+        "🇸🇬 狮城自动",
+        "🇯🇵 日本自动",
+      ]
+    },
+    {
       "tag": "📶 ISP 节点",
       "type": "selector",
       "outbounds": []
@@ -374,11 +389,16 @@
     {
       "tag": "block",
       "type": "block"
+    },
+    {
+      "tag": "Proxy",
+      "type": "selector",
+      "outbounds": []
     }
   ],
   "route": {
     "auto_detect_interface": true,
-    "final": "Proxy",
+    "final": "Fallback",
     "rules": [
       {
         "inbound": [
