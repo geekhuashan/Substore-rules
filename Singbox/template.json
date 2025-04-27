@@ -522,18 +522,13 @@
       },
       {
         "rule_set": [
-          "geosite-steam",
-          "geosite-epicgames",
-          "geosite-battlenet",
-          "geosite-origin",
-          "geosite-ubisoft"
+          "geosite-category-games"
         ],
         "outbound": "Gaming"
       },
       {
         "rule_set": [
-          "geosite-binance",
-          "geosite-coinbase"
+          "geosite-category-cryptocurrency"
         ],
         "outbound": "Crypto"
       },
@@ -740,6 +735,20 @@
         "format": "source",
         "url": "https://testingcf.jsdelivr.net/gh/geekhuashan/Proxy-Rules@main/sing-box/Talkatone.json",
         "download_detour": "direct"
+      },
+      {
+        "tag": "geosite-category-games",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/category-games.srs",
+        "download_detour": "Proxy"
+      },
+      {
+        "tag": "geosite-category-cryptocurrency",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/category-cryptocurrency.srs",
+        "download_detour": "Proxy"
       }
     ]
   }
