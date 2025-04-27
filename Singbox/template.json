@@ -54,7 +54,7 @@
       }
     ],
     "final": "dns_direct",
-    "strategy": "ipv4_only"
+    "strategy": "prefer_ipv4"
   },
   "inbounds": [
     {
@@ -714,46 +714,18 @@
         "download_detour": "direct"
       },
       {
-        "tag": "geosite-steam",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/steam.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "geosite-epicgames",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/epicgames.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "geosite-ubisoft",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/ubisoft.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "geosite-talkatone",
-        "type": "remote",
-        "format": "source",
-        "url": "https://testingcf.jsdelivr.net/gh/geekhuashan/Proxy-Rules@main/sing-box/Talkatone.json",
-        "download_detour": "direct"
-      },
-      {
         "tag": "geosite-category-games",
         "type": "remote",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/category-games.srs",
-        "download_detour": "direct"
+        "download_detour": "Proxy"
       },
       {
         "tag": "geosite-category-cryptocurrency",
         "type": "remote",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/category-cryptocurrency.srs",
-        "download_detour": "direct"
+        "download_detour": "Proxy"
       }
     ]
   }

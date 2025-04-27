@@ -27,7 +27,7 @@ config.outbounds.map(i => {
     }
     // 美国手动组
     if (['🇺🇸 美国手动'].includes(i.tag)) {
-        i.outbounds.push(...getTags(proxies, /美|us|unitedstates|united states|States|��🇸/i))
+        i.outbounds.push(...getTags(proxies, /美|us|unitedstates|united states|States|🇺🇸/i))
     }
     // ISP节点
     if (['📶 ISP 节点'].includes(i.tag)) {
@@ -60,7 +60,7 @@ config.outbounds.map(i => {
 })
 
 // 配置各分组的代理节点
-const mainGroups = ['Proxy', 'Domestic', 'Others', 'AI Suite', 'Netflix', 'Disney', 'YouTube', 'Spotify', 'Apple', 'Telegram', 'Microsoft']
+const mainGroups = ['Proxy', 'Domestic', 'AI Suite', 'Netflix', 'Disney', 'YouTube', 'Spotify', 'Apple', 'Telegram', 'Microsoft']
 for (const group of mainGroups) {
     const groupOutbound = config.outbounds.find(o => o.tag === group)
     if (groupOutbound && Array.isArray(groupOutbound.outbounds)) {
