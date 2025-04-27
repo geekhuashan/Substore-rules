@@ -115,24 +115,6 @@
       ]
     },
     {
-      "tag": "Others",
-      "type": "selector",
-      "outbounds": [
-        "Proxy",
-        "Auto - UrlTest",
-        "🇭🇰 香港自动",
-        "🇨🇳 台湾自动",
-        "🇸🇬 狮城自动",
-        "🇯🇵 日本自动",
-        "🇺🇲 美国自动",
-        "🇰🇷 韩国自动",
-        "🇺🇸 美国手动",
-        "Selector",
-        "📶 ISP 节点",
-        "direct"
-      ]
-    },
-    {
       "tag": "AI Suite",
       "type": "selector",
       "outbounds": [
@@ -489,7 +471,7 @@
       },
       {
         "rule_set": "geosite-disney",
-        "outbound": "Others"
+        "outbound": "Proxy"
       },
       {
         "rule_set": [
@@ -499,7 +481,7 @@
       },
       {
         "rule_set": "geosite-spotify",
-        "outbound": "Others"
+        "outbound": "Proxy"
       },
       {
         "rule_set": [
@@ -551,7 +533,7 @@
       },
       {
         "rule_set": "geosite-geolocation-!cn",
-        "outbound": "Others"
+        "outbound": "Proxy"
       },
       {
         "rule_set": [
