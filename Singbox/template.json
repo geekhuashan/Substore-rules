@@ -550,10 +550,6 @@
         "outbound": "Domestic"
       },
       {
-        "rule_set": "geosite-geolocation-!cn",
-        "outbound": "Proxy"
-      },
-      {
         "rule_set": [
           "geosite-category-games"
         ],
@@ -570,6 +566,10 @@
           "geosite-talkatone"
         ],
         "outbound": "Talkatone"
+      },
+      {
+        "rule_set": "geosite-geolocation-!cn",
+        "outbound": "Proxy"
       }
     ],
     "rule_set": [
@@ -746,14 +746,14 @@
         "type": "remote",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/category-games.srs",
-        "download_detour": "Proxy"
+        "download_detour": "direct"
       },
       {
         "tag": "geosite-category-cryptocurrency",
         "type": "remote",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/category-cryptocurrency.srs",
-        "download_detour": "Proxy"
+        "download_detour": "direct"
       }
     ]
   }
