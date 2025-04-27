@@ -105,14 +105,13 @@
       "type": "selector",
       "outbounds": [
         "direct",
-        "Proxy",
-        "📶 ISP 节点",
         "🇭🇰 香港自动",
         "🇨🇳 台湾自动",
-        "🇯🇵 日本自动",
         "🇸🇬 狮城自动",
-        "🇺🇲 美国自动",
-        "🇰🇷 韩国自动"
+        "🇯🇵 日本自动",
+        "Selector",
+        "📶 ISP 节点",
+        "Proxy"
       ]
     },
     {
@@ -120,16 +119,17 @@
       "type": "selector",
       "outbounds": [
         "Proxy",
-        "direct",
-        "Selector",
-        "📶 ISP 节点",
-        "🇺🇸 美国手动",
+        "Auto - UrlTest",
         "🇭🇰 香港自动",
         "🇨🇳 台湾自动",
-        "🇯🇵 日本自动",
         "🇸🇬 狮城自动",
+        "🇯🇵 日本自动",
         "🇺🇲 美国自动",
-        "🇰🇷 韩国自动"
+        "🇰🇷 韩国自动",
+        "🇺🇸 美国手动",
+        "Selector",
+        "📶 ISP 节点",
+        "direct"
       ]
     },
     {
@@ -137,16 +137,17 @@
       "type": "selector",
       "outbounds": [
         "Proxy",
-        "direct",
-        "Selector",
-        "📶 ISP 节点",
-        "🇺🇸 美国手动",
+        "Auto - UrlTest",
+        "🇸🇬 狮城自动",
         "🇭🇰 香港自动",
         "🇨🇳 台湾自动",
         "🇯🇵 日本自动",
-        "🇸🇬 狮城自动",
         "🇺🇲 美国自动",
-        "🇰🇷 韩国自动"
+        "🇰🇷 韩国自动",
+        "🇺🇸 美国手动",
+        "Selector",
+        "📶 ISP 节点",
+        "direct"
       ]
     },
     {
@@ -154,16 +155,16 @@
       "type": "selector",
       "outbounds": [
         "Proxy",
-        "direct",
-        "Selector",
-        "📶 ISP 节点",
-        "🇺🇸 美国手动",
+        "🇸🇬 狮城自动",
         "🇭🇰 香港自动",
         "🇨🇳 台湾自动",
         "🇯🇵 日本自动",
-        "🇸🇬 狮城自动",
         "🇺🇲 美国自动",
-        "🇰🇷 韩国自动"
+        "🇰🇷 韩国自动",
+        "🇺🇸 美国手动",
+        "Selector",
+        "📶 ISP 节点",
+        "direct"
       ]
     },
     {
@@ -188,15 +189,17 @@
       "type": "selector",
       "outbounds": [
         "Proxy",
-        "direct",
-        "Selector",
-        "📶 ISP 节点",
+        "Auto - UrlTest",
         "🇭🇰 香港自动",
         "🇨🇳 台湾自动",
-        "🇯🇵 日本自动",
         "🇸🇬 狮城自动",
+        "🇯🇵 日本自动",
         "🇺🇲 美国自动",
-        "🇰🇷 韩国自动"
+        "🇰🇷 韩国自动",
+        "🇺🇸 美国手动",
+        "Selector",
+        "📶 ISP 节点",
+        "direct"
       ]
     },
     {
@@ -222,13 +225,15 @@
       "outbounds": [
         "direct",
         "Proxy",
-        "📶 ISP 节点",
+        "🇺🇲 美国自动",
         "🇭🇰 香港自动",
         "🇨🇳 台湾自动",
-        "🇯🇵 日本自动",
         "🇸🇬 狮城自动",
-        "🇺🇲 美国自动",
-        "🇰🇷 韩国自动"
+        "🇯🇵 日本自动",
+        "🇰🇷 韩国自动",
+        "🇺🇸 美国手动",
+        "Selector",
+        "📶 ISP 节点"
       ]
     },
     {
@@ -244,7 +249,7 @@
         "🇨🇳 台湾自动",
         "🇯🇵 日本自动",
         "🇸🇬 狮城自动",
-        "🇺🇲 美国自动",
+        "🇺�� 美国自动",
         "🇰🇷 韩国自动"
       ]
     },
@@ -252,17 +257,17 @@
       "tag": "Microsoft",
       "type": "selector",
       "outbounds": [
-        "Proxy",
         "direct",
-        "Selector",
-        "📶 ISP 节点",
-        "🇺🇸 美国手动",
+        "Proxy",
+        "🇺🇲 美国自动",
         "🇭🇰 香港自动",
         "🇨🇳 台湾自动",
-        "🇯🇵 日本自动",
         "🇸🇬 狮城自动",
-        "🇺🇲 美国自动",
-        "🇰🇷 韩国自动"
+        "🇯🇵 日本自动",
+        "🇰🇷 韩国自动",
+        "🇺🇸 美国手动",
+        "Selector",
+        "📶 ISP 节点"
       ]
     },
     {
@@ -270,33 +275,87 @@
       "type": "selector",
       "outbounds": [
         "Proxy",
-        "direct",
-        "Selector",
-        "📶 ISP 节点",
-        "🇺🇸 美国手动",
+        "Auto - UrlTest",
+        "🇺🇲 美国自动",
         "🇭🇰 香港自动",
         "🇨🇳 台湾自动",
-        "🇯🇵 日本自动",
         "🇸🇬 狮城自动",
-        "🇺🇲 美国自动",
-        "🇰🇷 韩国自动"
+        "🇯🇵 日本自动",
+        "🇰🇷 韩国自动",
+        "🇺🇸 美国手动",
+        "Selector",
+        "📶 ISP 节点",
+        "direct"
       ]
     },
     {
       "tag": "Google FCM",
       "type": "selector",
       "outbounds": [
-        "Proxy",
         "direct",
-        "Selector",
-        "📶 ISP 节点",
+        "Proxy",
+        "🇺🇲 美国自动",
+        "🇭🇰 香港自动",
+        "🇨🇳 台湾自动",
+        "🇸🇬 狮城自动",
+        "🇯🇵 日本自动",
+        "🇰🇷 韩国自动",
         "🇺🇸 美国手动",
+        "Selector",
+        "📶 ISP 节点"
+      ]
+    },
+    {
+      "tag": "Gaming",
+      "type": "selector",
+      "outbounds": [
+        "direct",
+        "Proxy",
+        "🇺🇲 美国自动",
+        "🇭🇰 香港自动",
+        "🇨🇳 台湾自动",
+        "🇸🇬 狮城自动",
+        "🇯🇵 日本自动",
+        "🇰🇷 韩国自动",
+        "🇺🇸 美国手动",
+        "Selector",
+        "📶 ISP 节点"
+      ]
+    },
+    {
+      "tag": "Crypto",
+      "type": "selector",
+      "outbounds": [
+        "Proxy",
+        "Auto - UrlTest",
+        "🇸🇬 狮城自动",
         "🇭🇰 香港自动",
         "🇨🇳 台湾自动",
         "🇯🇵 日本自动",
-        "🇸🇬 狮城自动",
         "🇺🇲 美国自动",
-        "🇰🇷 韩国自动"
+        "🇰🇷 韩国自动",
+        "🇺🇸 美国手动",
+        "Selector",
+        "📶 ISP 节点",
+        "direct"
+      ]
+    },
+    {
+      "tag": "Talkatone",
+      "type": "selector",
+      "outbounds": [
+        "Proxy",
+        "Auto - UrlTest",
+        "🇺🇲 美国自动",
+        "🇭🇰 香港自动",
+        "🇨🇳 台湾自动",
+        "🇸🇬 狮城自动",
+        "🇯🇵 日本自动",
+        "🇰🇷 韩国自动",
+        "🇺🇸 美国手动",
+        "Selector",
+        "📶 ISP 节点",
+        "direct"
       ]
     },
     {
@@ -550,6 +609,30 @@
       {
         "rule_set": "geosite-geolocation-!cn",
         "outbound": "Others"
+      },
+      {
+        "rule_set": [
+          "geosite-steam",
+          "geosite-epicgames",
+          "geosite-battlenet",
+          "geosite-origin",
+          "geosite-ubisoft"
+        ],
+        "outbound": "Gaming"
+      },
+      {
+        "rule_set": [
+          "geosite-binance",
+          "geosite-coinbase"
+        ],
+        "outbound": "Crypto"
+      },
+      {
+        "domain": [
+          "talkatone.com",
+          "*.talkatone.com"
+        ],
+        "outbound": "Talkatone"
       }
     ],
     "rule_set": [
@@ -691,6 +774,55 @@
         "type": "remote",
         "format": "source",
         "url": "https://testingcf.jsdelivr.net/gh/geekhuashan/Proxy-Rules@main/sing-box/huashan.json",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "geosite-steam",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/steam.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "geosite-epicgames",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/epicgames.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "geosite-battlenet",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/battlenet.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "geosite-origin",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/origin.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "geosite-ubisoft",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/ubisoft.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "geosite-binance",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/binance.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "geosite-coinbase",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/coinbase.srs",
         "download_detour": "direct"
       }
     ]
