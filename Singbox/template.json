@@ -695,38 +695,10 @@
         "download_detour": "direct"
       },
       {
-        "tag": "geosite-battlenet",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/battlenet.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "geosite-origin",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/origin.srs",
-        "download_detour": "direct"
-      },
-      {
         "tag": "geosite-ubisoft",
         "type": "remote",
         "format": "binary",
         "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/ubisoft.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "geosite-binance",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/binance.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "geosite-coinbase",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/coinbase.srs",
         "download_detour": "direct"
       },
       {
