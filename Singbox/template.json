@@ -571,9 +571,8 @@
         "outbound": "Crypto"
       },
       {
-        "domain": [
-          "talkatone.com",
-          "*.talkatone.com"
+        "rule_set": [
+          "geosite-talkatone"
         ],
         "outbound": "Talkatone"
       }
@@ -766,6 +765,13 @@
         "type": "remote",
         "format": "binary",
         "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/coinbase.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "geosite-talkatone",
+        "type": "remote",
+        "format": "source",
+        "url": "https://testingcf.jsdelivr.net/gh/geekhuashan/Proxy-Rules@main/sing-box/Talkatone.json",
         "download_detour": "direct"
       }
     ]
