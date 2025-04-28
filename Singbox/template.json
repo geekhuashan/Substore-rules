@@ -460,6 +460,10 @@
         "action": "reject"
       },
       {
+        "rule_set": "geosite-talkatone-adblock",
+        "action": "reject"
+      },
+      {
         "clash_mode": "direct",
         "outbound": "direct"
       },
@@ -705,6 +709,13 @@
         "format": "binary",
         "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/googlefcm.srs",
         "download_detour": "direct"
+      },
+      {
+        "tag": "geosite-talkatone-adblock",
+        "type": "remote",
+        "format": "source",
+        "url": "https://raw.githubusercontent.com/geekhuashan/Proxy-Rules/main/sing-box/Talkatone-adblock.json",
+        "download_detour": "Proxy"
       },
       {
         "tag": "geosite-huashan",
