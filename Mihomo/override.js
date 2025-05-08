@@ -65,7 +65,7 @@ const regionOptions = {
       icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Taiwan.png',
     },
     {
-      name: '🇺🇲 美国节点',
+      name: '🇺s 美国节点',
       regex: /(🇺🇸)|(美)|(States)|(US)/i,
       ratioLimit: 2,
       icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/United_States.png',
@@ -169,6 +169,10 @@ const rules = [
 
 // 程序入口
 function main(config) {
+  if (!enable) {
+    return config;
+  }
+
   const proxyCount = config?.proxies?.length ?? 0
   const proxyProviderCount =
     typeof config?.['proxy-providers'] === 'object'
@@ -178,11 +182,14 @@ function main(config) {
     throw new Error('配置文件中未找到任何代理')
   }
 
-  // Preserve some basic settings from the original override.js
+  // 初始化代理数组，确保它是一个数组
+  config.proxies = Array.isArray(config.proxies) ? [...config.proxies] : [];
+
+  // 基础设置
   config['allow-lan'] = true
   config['bind-address'] = '*'
   config['mode'] = 'rule'
-  config['dns'] = dnsConfig // dnsConfig is defined above in override.js, assumed to be kept
+  config['dns'] = dnsConfig
   config['profile'] = { 'store-selected': true, 'store-fake-ip': true }
   config['unified-delay'] = true
   config['tcp-concurrent'] = true
@@ -217,15 +224,12 @@ function main(config) {
     asn: 'https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/GeoLite2-ASN.mmdb',
   }
   
-  // Add DIRECT proxy, as original override.js does
-  config.proxies = config?.proxies || []
-  if (!config.proxies.find(p => p.name === '直连')) {
-    config.proxies.push({ name: '直连', type: 'direct', udp: true });
-  }
-  // Add REJECT proxy, ensuring it is uniquely defined
-  // First, remove any existing proxies named 'REJECT' to prevent duplicates.
-  config.proxies = config.proxies.filter(p => p.name !== 'REJECT');
-  // Then, add the canonical 'REJECT' proxy.
+  // 处理标准代理（DIRECT和REJECT）
+  // 1. 首先移除所有名为"直连"和"REJECT"的代理
+  config.proxies = config.proxies.filter(p => p.name !== '直连' && p.name !== 'REJECT');
+  
+  // 2. 添加标准的直连和拒绝代理
+  config.proxies.push({ name: '直连', type: 'direct', udp: true });
   config.proxies.push({ name: 'REJECT', type: 'reject', udp: true });
 
   // --- REGION PROXY GROUP GENERATION (using updated regionOptions) ---
@@ -551,22 +555,6 @@ function main(config) {
     hulu: false, primevideo: false, telegram: false, line: false, whatsapp: false,
     games: false, japan: false, tracker: false, ads: false,
   };
-
-
-  // The main 'enable' switch should still be respected for the entire override functionality
-  if (!enable) { // 'enable' is the global const at the top of override.js
-    // If disabled, perhaps return a very minimal config or the original one.
-    // For now, if disabled, we just return the config as modified by basic settings.
-    // The rules and groups won't be applied if the main function exits early.
-    // This part needs careful consideration based on how 'enable' is meant to behave
-    // with the new structure.
-    // For this overhaul, we assume 'enable = true' means apply all these new Dler-based settings.
-    // If 'enable = false', the original override.js returned config; we'll simplify:
-    // if !enable, just return basic config settings without new groups/rules.
-     return config; // This might need refinement: what should happen if 'enable' is false?
-                    // Original script returned 'config' after initial proxy checks if !enable.
-                    // So, if enable is false, the new groups/rules won't be added.
-  }
 
   // 返回修改后的配置
   return config;
