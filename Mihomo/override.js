@@ -222,10 +222,11 @@ function main(config) {
   if (!config.proxies.find(p => p.name === '直连')) {
     config.proxies.push({ name: '直连', type: 'direct', udp: true });
   }
-  // Add REJECT proxy if needed by groups
-  if (!config.proxies.find(p => p.name === 'REJECT')) {
-    config.proxies.push({ name: 'REJECT', type: 'reject', udp: true });
-  }
+  // Add REJECT proxy, ensuring it is uniquely defined
+  // First, remove any existing proxies named 'REJECT' to prevent duplicates.
+  config.proxies = config.proxies.filter(p => p.name !== 'REJECT');
+  // Then, add the canonical 'REJECT' proxy.
+  config.proxies.push({ name: 'REJECT', type: 'reject', udp: true });
 
   // --- REGION PROXY GROUP GENERATION (using updated regionOptions) ---
   let regionProxyGroups = []
