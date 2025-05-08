@@ -190,8 +190,16 @@ ruleProviders.set('applications', {
   url: 'https://fastly.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/applications.list',
   path: './ruleset/DustinWin/applications.list',
 })
+ruleProviders.set('huashanSpecial', {
+  ...ruleProviderCommon,
+  behavior: 'classical',
+  format: 'text',
+  url: 'https://raw.githubusercontent.com/geekhuashan/Proxy-Rules/refs/heads/main/Surge/Surge%203/Provider/huashan.list',
+  path: './ruleset/GeekHuashan/huashan.list',
+})
 
 const rules = [
+  'RULE-SET,huashanSpecial,huashanlist',
   'RULE-SET,applications,下载软件',
   'PROCESS-NAME,SunloginClient,DIRECT',
   'PROCESS-NAME,SunloginClient.exe,DIRECT',
@@ -348,6 +356,13 @@ function main(config) {
   }
 
   config['proxy-groups'] = [
+    {
+      ...groupBaseOption,
+      name: 'huashanlist',
+      type: 'select',
+      proxies: ['ISP 节点', 'US美国', '直连', '默认节点'],
+      icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Filter.png',
+    },
     {
       ...groupBaseOption,
       name: '默认节点',
