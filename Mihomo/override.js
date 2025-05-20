@@ -358,17 +358,17 @@ function main(config) {
   config['proxy-groups'] = [
     {
       ...groupBaseOption,
-      name: 'huashanlist',
-      type: 'select',
-      proxies: ['ISP 节点', 'US美国', '直连', '默认节点'],
-      icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Filter.png',
-    },
-    {
-      ...groupBaseOption,
       name: '默认节点',
       type: 'select',
       proxies: [...proxyGroupsRegionNames, '直连'],
       icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Proxy.png',
+    },
+    {
+      ...groupBaseOption,
+      name: 'huashanlist',
+      type: 'select',
+      proxies: ['ISP 节点', 'US美国', '直连', '默认节点'],
+      icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Filter.png',
     },
   ]
 
