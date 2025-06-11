@@ -399,6 +399,32 @@
     "final": "Fallback",
     "rules": [
       {
+        "domain_suffix": [
+          "tailscale.com",
+          "tailscale.io",
+          "ipn.dev"
+        ],
+        "outbound": "direct"
+      },
+      {
+        "domain_keyword": [
+          "tailscale"
+        ],
+        "outbound": "direct"
+      },
+      {
+        "ip_cidr": [
+          "100.64.0.0/10"
+        ],
+        "outbound": "direct"
+      },
+      {
+        "ip_cidr": [
+          "fd7a:115c:a1e0::/48"
+        ],
+        "outbound": "direct"
+      },
+      {
         "inbound": [
           "tun-in",
           "mixed-in"
