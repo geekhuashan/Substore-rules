@@ -886,7 +886,7 @@ function main(config) {
     rules.push(`RULE-SET,${key},${target}`)
   })
 
-  rules.push('RULE-SET,LAN,DIRECT')
+  rules.push('GEOIP,LAN,DIRECT')
   rules.push('GEOIP,CN,🎯 全球直连')
   rules.push('MATCH,🐟 漏网之鱼')
 
