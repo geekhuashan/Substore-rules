@@ -112,7 +112,39 @@ const dnsConfig = {
   'respect-rules': true,
   'enhanced-mode': 'fake-ip',
   'fake-ip-range': '198.18.0.1/16',
-  'fake-ip-filter': ['*', '+.lan', '+.local', '+.market.xiaomi.com'],
+  'fake-ip-filter': [
+    '*',
+    '+.lan',
+    '+.local',
+    '+.market.xiaomi.com',
+    // NAS 和个人域名使用真实 IP
+    'nas.geekhuashan.com',
+    '+.geekhuashan.com',
+    // 游戏和特殊服务使用真实 IP（避免连接问题）
+    '+.srv.nintendo.net',
+    '+.stun.playstation.net',
+    'xbox.*.microsoft.com',
+    '+.xboxlive.com',
+    '+.battlenet.com.cn',
+    '+.battlenet.com',
+    '+.blzstatic.cn',
+    '+.battle.net',
+    // Windows 网络检测
+    '+.msftconnecttest.com',
+    '+.msftncsi.com',
+    'msftconnecttest.com',
+    'msftncsi.com',
+    // QQ 登录相关
+    'localhost.ptlogin2.qq.com',
+    'localhost.sec.qq.com',
+    // STUN 服务器
+    '+.stun.*.*',
+    '+.turns.*.*',
+    '+.turn.*.*',
+    'stun.l.google.com',
+    // Netflix 帮助页面
+    '+.help.netflix.com',
+  ],
   // 'default-nameserver': [...defaultDNS],
   nameserver: [...foreignDNS],
   'proxy-server-nameserver': [...foreignDNS],
@@ -123,6 +155,9 @@ const dnsConfig = {
   'nameserver-policy': {
     'geosite:private': 'system',
     'geosite:cn,steam@cn,category-games@cn,microsoft@cn,apple@cn': chinaDNS,
+    // NAS 域名使用国内 DNS
+    '+.geekhuashan.com': chinaDNS,
+    'nas.geekhuashan.com': chinaDNS,
   },
 }
 
@@ -854,11 +889,19 @@ function main(config) {
 
   const ruleProviders = new Map()
   const rules = [
+    // ========== NAS 直连规则（最高优先级！必须在最前面）==========
+    'DOMAIN-SUFFIX,geekhuashan.com,DIRECT',
+    'DOMAIN,nas.geekhuashan.com,DIRECT',
+    'DST-PORT,8000,DIRECT',
+    'DST-PORT,8001,DIRECT',
+    'IP-CIDR,101.132.148.140/32,DIRECT,no-resolve',
+
+    // ========== 本地网络直连 ==========
     'DOMAIN-SUFFIX,tailscale.com,DIRECT',
     'DOMAIN-SUFFIX,tailscale.io,DIRECT',
     'DOMAIN-SUFFIX,ipn.dev,DIRECT',
     'DOMAIN-SUFFIX,local,DIRECT',
-    'IP-CIDR6,fd7a:115c:a1e0::/48,DIRECT,no-resolve',
+    'IP-CIDR6,fd7a:115c:a1e0::/48,DIRECT,no-resolve', // Tailscale IPv6
     'IP-CIDR,127.0.0.1/32,DIRECT,no-resolve',
     'IP-CIDR,192.168.71.100/32,DIRECT,no-resolve',
     'IP-CIDR,192.168.71.0/24,DIRECT,no-resolve',
@@ -867,7 +910,32 @@ function main(config) {
     'IP-CIDR,192.168.0.0/16,DIRECT,no-resolve',
     'IP-CIDR,192.168.122.1/32,DIRECT,no-resolve',
     'IP-CIDR,193.168.0.1/32,DIRECT,no-resolve',
-    'IP-CIDR,100.64.0.0/10,DIRECT,no-resolve',
+    'IP-CIDR,100.64.0.0/10,DIRECT,no-resolve', // Tailscale CGNAT
+
+    // ========== Meta/Facebook 专属规则（使用 huashan 分组）==========
+    'IP-ASN,32934,👨‍🎓 huashan', // Meta ASN
+    'DOMAIN-SUFFIX,meta.com,👨‍🎓 huashan',
+    'DOMAIN-SUFFIX,facebook.com,👨‍🎓 huashan',
+    'DOMAIN-SUFFIX,fbcdn.net,👨‍🎓 huashan',
+    'DOMAIN-SUFFIX,oculus.com,👨‍🎓 huashan',
+    'DOMAIN-SUFFIX,instagram.com,👨‍🎓 huashan',
+    'DOMAIN-SUFFIX,whatsapp.com,👨‍🎓 huashan',
+    'DOMAIN-SUFFIX,ray-ban.com,👨‍🎓 huashan',
+
+    // ========== Google/YouTube 核心域名规则（在 RULE-SET 之前）==========
+    'DOMAIN-SUFFIX,youtube.com,📹 油管视频',
+    'DOMAIN-SUFFIX,googlevideo.com,📹 油管视频',
+    'DOMAIN-SUFFIX,ytimg.com,📹 油管视频',
+    'DOMAIN-SUFFIX,ggpht.com,📹 油管视频',
+    'DOMAIN-SUFFIX,google.com,🔍 谷歌搜索',
+    'DOMAIN-SUFFIX,googleapis.com,🔍 谷歌搜索',
+    'DOMAIN-SUFFIX,googleusercontent.com,🔍 谷歌搜索',
+    'DOMAIN-SUFFIX,gstatic.com,🔍 谷歌搜索',
+    'DOMAIN-SUFFIX,gmail.com,🔍 谷歌搜索',
+    'DOMAIN-SUFFIX,gvt1.com,🔍 谷歌搜索',
+
+    // ⚠️⚠️⚠️ 关键：强制 QUIC 协议走代理（防止某些服务绕过代理）⚠️⚠️⚠️
+    'NETWORK,UDP,🚀 节点选择',
   ]
 
   remoteRuleSets.forEach(({ key, url, path, target }) => {
