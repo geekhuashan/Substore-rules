@@ -913,7 +913,7 @@ function main(config) {
     'IP-CIDR,100.64.0.0/10,DIRECT,no-resolve', // Tailscale CGNAT
 
     // ========== Meta/Facebook 专属规则（使用 huashan 分组）==========
-    'IP-ASN,32934,👨‍🎓 huashan', // Meta ASN
+    // 先匹配域名规则（避免不必要的 DNS 解析）
     'DOMAIN-SUFFIX,meta.com,👨‍🎓 huashan',
     'DOMAIN-SUFFIX,facebook.com,👨‍🎓 huashan',
     'DOMAIN-SUFFIX,fbcdn.net,👨‍🎓 huashan',
@@ -921,6 +921,8 @@ function main(config) {
     'DOMAIN-SUFFIX,instagram.com,👨‍🎓 huashan',
     'DOMAIN-SUFFIX,whatsapp.com,👨‍🎓 huashan',
     'DOMAIN-SUFFIX,ray-ban.com,👨‍🎓 huashan',
+    // IP-ASN 规则放在域名规则后面，并加上 no-resolve 参数
+    'IP-ASN,32934,👨‍🎓 huashan,no-resolve', // Meta ASN（兜底直连 IP 的情况）
 
     // ========== Google/YouTube 核心域名规则（在 RULE-SET 之前）==========
     'DOMAIN-SUFFIX,youtube.com,📹 油管视频',
