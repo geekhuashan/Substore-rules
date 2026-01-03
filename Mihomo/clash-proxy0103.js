@@ -657,6 +657,93 @@ function main(config) {
   let remainingProxyNames = [...proxyNames]
   const regionProxyGroups = []
 
+  // === 住宅 IP 链式代理配置 ===
+  // 与 Surge 的 underlying-proxy 对应，Mihomo 使用 dialer-proxy 实现
+  // 流量路径：你 → 前置代理(地区节点) → 住宅IP(socks5) → 目标
+  const ispChainServer = '223.29.144.254'
+  const ispChainPort = 12324
+  const ispChainUsername = 'huashan'
+  const ispChainPassword = 'qws052017283'
+
+  // 链式代理定义，dialer-proxy 会在后面动态设置
+  const ispChainProxies = [
+    {
+      name: '🏠 ISP-香港链',
+      type: 'socks5',
+      server: ispChainServer,
+      port: ispChainPort,
+      username: ispChainUsername,
+      password: ispChainPassword,
+      'dialer-proxy': '🇭🇰 香港节点',
+    },
+    {
+      name: '🏠 ISP-美国链',
+      type: 'socks5',
+      server: ispChainServer,
+      port: ispChainPort,
+      username: ispChainUsername,
+      password: ispChainPassword,
+      'dialer-proxy': '🇺🇲 美国节点',
+    },
+    {
+      name: '🏠 ISP-日本链',
+      type: 'socks5',
+      server: ispChainServer,
+      port: ispChainPort,
+      username: ispChainUsername,
+      password: ispChainPassword,
+      'dialer-proxy': '🇯🇵 日本节点',
+    },
+    {
+      name: '🏠 ISP-新加坡链',
+      type: 'socks5',
+      server: ispChainServer,
+      port: ispChainPort,
+      username: ispChainUsername,
+      password: ispChainPassword,
+      'dialer-proxy': '🇸🇬 狮城节点',
+    },
+    {
+      name: '🏠 ISP-韩国链',
+      type: 'socks5',
+      server: ispChainServer,
+      port: ispChainPort,
+      username: ispChainUsername,
+      password: ispChainPassword,
+      'dialer-proxy': '🇰🇷 韩国节点',
+    },
+    {
+      name: '🏠 ISP-台湾链',
+      type: 'socks5',
+      server: ispChainServer,
+      port: ispChainPort,
+      username: ispChainUsername,
+      password: ispChainPassword,
+      'dialer-proxy': '🇨🇳 台湾节点',
+    },
+    {
+      name: '🏠 ISP-手动链',
+      type: 'socks5',
+      server: ispChainServer,
+      port: ispChainPort,
+      username: ispChainUsername,
+      password: ispChainPassword,
+      'dialer-proxy': '🚀 节点选择',
+    },
+    {
+      name: '🏠 ISP-自动链',
+      type: 'socks5',
+      server: ispChainServer,
+      port: ispChainPort,
+      username: ispChainUsername,
+      password: ispChainPassword,
+      'dialer-proxy': '♻️ 自动选择',
+    },
+  ]
+
+  // 链式代理节点名称列表
+  const ispChainProxyNames = ispChainProxies.map((p) => p.name)
+
   const latencyTestRegions = new Set(['🇭🇰 香港节点', '🇨🇳 台湾节点', '🇯🇵 日本节点', '🇸🇬 狮城节点'])
 
   regionOptions.regions.forEach((region) => {
@@ -688,7 +775,8 @@ function main(config) {
   })
 
   const regionGroupNames = regionProxyGroups.map((group) => group.name)
-  const hasISPGroup = regionGroupNames.includes('📶 ISP节点')
+  // hasISPGroup 始终为 true，因为我们会创建包含链式代理的 ISP节点 代理组
+  const hasISPGroup = true
   const otherGroupName = remainingProxyNames.length > 0 ? '🌐 其他节点' : null
 
   const ensureExists = (candidates) =>
@@ -763,6 +851,7 @@ function main(config) {
       type: 'select',
       proxies: [
         ...(hasISPGroup ? ['📶 ISP节点'] : []),
+        '🚀 节点选择',
         ...(regionGroupNames.includes('🇺🇲 美国节点') ? ['🇺🇲 美国节点'] : []),
         'DIRECT',
       ],
@@ -800,14 +889,27 @@ function main(config) {
       ...groupBaseOption,
       name: '💬 OpenAi',
       type: 'select',
-      proxies: ['🚀 节点选择', '♻️ 自动选择', ...openAiRegions, ...tailWithManual, 'DIRECT'],
+      proxies: [
+        ...(hasISPGroup ? ['� ISP节点'] : []),
+        '�🚀 节点选择',
+        '♻️ 自动选择',
+        ...openAiRegions,
+        ...(otherGroupName ? [otherGroupName] : []),
+        'DIRECT',
+      ],
       icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/ChatGPT.png',
     },
     {
       ...groupBaseOption,
       name: '📢 谷歌FCM',
       type: 'select',
-      proxies: ['DIRECT', '🚀 节点选择', ...usFirstRegions, ...tailWithManual],
+      proxies: [
+        ...(hasISPGroup ? ['📶 ISP节点'] : []),
+        'DIRECT',
+        '🚀 节点选择',
+        ...usFirstRegions,
+        ...(otherGroupName ? [otherGroupName] : []),
+      ],
       icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Google.png',
     },
     {
@@ -842,14 +944,28 @@ function main(config) {
       ...groupBaseOption,
       name: '📞 talkatone',
       type: 'select',
-      proxies: ['🚀 节点选择', '♻️ 自动选择', ...usFirstRegions, ...tailWithManual, 'DIRECT'],
+      proxies: [
+        ...(hasISPGroup ? ['� ISP节点'] : []),
+        '�🚀 节点选择',
+        '♻️ 自动选择',
+        ...usFirstRegions,
+        ...(otherGroupName ? [otherGroupName] : []),
+        'DIRECT',
+      ],
       icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Phone.png',
     },
     {
       ...groupBaseOption,
       name: '🔍 谷歌搜索',
       type: 'select',
-      proxies: ['🚀 节点选择', '♻️ 自动选择', ...usFirstRegions, ...tailWithManual, 'DIRECT'],
+      proxies: [
+        ...(hasISPGroup ? ['� ISP节点'] : []),
+        '�🚀 节点选择',
+        '♻️ 自动选择',
+        ...usFirstRegions,
+        ...(otherGroupName ? [otherGroupName] : []),
+        'DIRECT',
+      ],
       icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Google_Search.png',
     },
     {
@@ -870,7 +986,14 @@ function main(config) {
       ...groupBaseOption,
       name: '🐟 漏网之鱼',
       type: 'select',
-      proxies: ['🚀 节点选择', '♻️ 自动选择', 'DIRECT', ...prioritizedRegions, ...tailWithManual],
+      proxies: [
+        ...(hasISPGroup ? ['� ISP节点'] : []),
+        '�🚀 节点选择',
+        '♻️ 自动选择',
+        'DIRECT',
+        ...prioritizedRegions,
+        ...(otherGroupName ? [otherGroupName] : []),
+      ],
       icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Final.png',
     },
   ]
@@ -885,24 +1008,75 @@ function main(config) {
     })
   }
 
+  // 将链式代理添加到 proxies 列表
+  config.proxies = [...(config.proxies || []), ...ispChainProxies]
+
+  // 修改 ISP节点 代理组：加入链式代理，改为 url-test 类型
+  // 与 Surge 配置一致：链式代理放在最前面，然后是订阅中的 ISP 节点
+  const ispGroupIndex = regionProxyGroups.findIndex((g) => g.name === '📶 ISP节点')
+  if (ispGroupIndex !== -1) {
+    const originalISPProxies = regionProxyGroups[ispGroupIndex].proxies || []
+    regionProxyGroups[ispGroupIndex] = {
+      ...groupBaseOption,
+      name: '📶 ISP节点',
+      type: 'url-test',
+      url: 'http://www.gstatic.com/generate_204',
+      interval: 300,
+      tolerance: 50,
+      proxies: [...ispChainProxyNames, ...originalISPProxies],
+      icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Network_2.png',
+    }
+  } else {
+    // 如果没有订阅中的 ISP 节点，也创建一个只包含链式代理的代理组
+    regionProxyGroups.push({
+      ...groupBaseOption,
+      name: '📶 ISP节点',
+      type: 'url-test',
+      url: 'http://www.gstatic.com/generate_204',
+      interval: 300,
+      tolerance: 50,
+      proxies: ispChainProxyNames,
+      icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Network_2.png',
+    })
+  }
+
   config['proxy-groups'] = config['proxy-groups'].concat(regionProxyGroups)
 
   const ruleProviders = new Map()
   const rules = [
-    // ========== NAS 直连规则（最高优先级！必须在最前面）==========
-    'DOMAIN-SUFFIX,geekhuashan.com,DIRECT',
-    'DOMAIN,nas.geekhuashan.com,DIRECT',
-    'DST-PORT,8000,DIRECT',
-    'DST-PORT,8001,DIRECT',
+    // ========== VPS 直连(最高优先级) ==========
     'IP-CIDR,101.132.148.140/32,DIRECT,no-resolve',
 
-    // ========== 本地网络直连 ==========
+    // ========== huaikhwang.central-world.org 直连 ==========
+    'DOMAIN,huaikhwang.central-world.org,DIRECT',
+    'DOMAIN-SUFFIX,central-world.org,DIRECT',
+    'DOMAIN-KEYWORD,central-world,DIRECT',
+    // IP 段规则 - 覆盖该域名的所有可能 IP
+    'IP-CIDR,65.75.223.0/24,DIRECT,no-resolve',
+    'IP-CIDR,108.165.170.0/24,DIRECT,no-resolve',
+    'IP-CIDR,114.28.137.0/24,DIRECT,no-resolve',
+    'IP-CIDR,154.12.54.0/24,DIRECT,no-resolve',
+
+    // ========== 订阅服务直连 ==========
+    'DOMAIN-SUFFIX,geekhuashan.cn,DIRECT',
+    'DOMAIN,sub.geekhuashan.cn,DIRECT',
+    'DOMAIN-SUFFIX,nobodys.uk,DIRECT',
+    'DOMAIN-SUFFIX,parkson-market.org,DIRECT',
+    'DOMAIN-SUFFIX,aihubmix.com,DIRECT',
+
+    // ========== 本地直连 ==========
     'DOMAIN-SUFFIX,tailscale.com,DIRECT',
     'DOMAIN-SUFFIX,tailscale.io,DIRECT',
     'DOMAIN-SUFFIX,ipn.dev,DIRECT',
     'DOMAIN-SUFFIX,local,DIRECT',
     'IP-CIDR6,fd7a:115c:a1e0::/48,DIRECT,no-resolve', // Tailscale IPv6
     'IP-CIDR,127.0.0.1/32,DIRECT,no-resolve',
+
+    // ========== NAS 直连规则 ==========
+    'DOMAIN-SUFFIX,geekhuashan.com,DIRECT',
+    'DOMAIN,nas.geekhuashan.com,DIRECT',
+    'DST-PORT,8000,DIRECT',
+    'DST-PORT,8001,DIRECT',
     'IP-CIDR,192.168.71.100/32,DIRECT,no-resolve',
     'IP-CIDR,192.168.71.0/24,DIRECT,no-resolve',
     'IP-CIDR,10.0.0.0/8,DIRECT,no-resolve',
