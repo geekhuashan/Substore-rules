@@ -890,8 +890,8 @@ function main(config) {
       name: '💬 OpenAi',
       type: 'select',
       proxies: [
-        ...(hasISPGroup ? ['� ISP节点'] : []),
-        '�🚀 节点选择',
+        ...(hasISPGroup ? ['📶 ISP节点'] : []),
+        '🚀 节点选择',
         '♻️ 自动选择',
         ...openAiRegions,
         ...(otherGroupName ? [otherGroupName] : []),
@@ -945,8 +945,8 @@ function main(config) {
       name: '📞 talkatone',
       type: 'select',
       proxies: [
-        ...(hasISPGroup ? ['� ISP节点'] : []),
-        '�🚀 节点选择',
+        ...(hasISPGroup ? ['📶 ISP节点'] : []),
+        '🚀 节点选择',
         '♻️ 自动选择',
         ...usFirstRegions,
         ...(otherGroupName ? [otherGroupName] : []),
@@ -959,8 +959,8 @@ function main(config) {
       name: '🔍 谷歌搜索',
       type: 'select',
       proxies: [
-        ...(hasISPGroup ? ['� ISP节点'] : []),
-        '�🚀 节点选择',
+        ...(hasISPGroup ? ['📶 ISP节点'] : []),
+        '🚀 节点选择',
         '♻️ 自动选择',
         ...usFirstRegions,
         ...(otherGroupName ? [otherGroupName] : []),
@@ -987,8 +987,8 @@ function main(config) {
       name: '🐟 漏网之鱼',
       type: 'select',
       proxies: [
-        ...(hasISPGroup ? ['� ISP节点'] : []),
-        '�🚀 节点选择',
+        ...(hasISPGroup ? ['📶 ISP节点'] : []),
+        '🚀 节点选择',
         '♻️ 自动选择',
         'DIRECT',
         ...prioritizedRegions,
