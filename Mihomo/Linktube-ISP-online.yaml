@@ -1,0 +1,771 @@
+# Clash/Mihomo 配置文件
+# 由 Surge 配置 Linktube-ISP-online.conf 转换而来
+
+# ===== 基本设置 =====
+mixed-port: 7890
+socks-port: 8889
+port: 8888
+allow-lan: true
+bind-address: "*"
+mode: rule
+log-level: info
+ipv6: false
+external-controller: 0.0.0.0:9090
+
+# ===== DNS 设置 =====
+dns:
+  enable: true
+  listen: 0.0.0.0:53
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  # 这些域名始终解析真实 IP（避免 Fake-IP）
+  fake-ip-filter:
+    - "*.local"
+    - "*.lan"
+    - nas.geekhuashan.com
+    - "*.geekhuashan.com"
+    - "*.geekhuashan.cn"
+    - sub.geekhuashan.cn
+    - huaikhwang.central-world.org
+    - "*.central-world.org"
+    - "*.srv.nintendo.net"
+    - "*.stun.playstation.net"
+    - "xbox.*.microsoft.com"
+    - "*.xboxlive.com"
+    - "*.battlenet.com.cn"
+    - "*.battlenet.com"
+    - "*.blzstatic.cn"
+    - "*.battle.net"
+    - "*.msftconnecttest.com"
+    - "*.msftncsi.com"
+    - msftconnecttest.com
+    - msftncsi.com
+    - localhost.ptlogin2.qq.com
+    - localhost.sec.qq.com
+    - "+.srv.nintendo.net"
+    - "+.stun.playstation.net"
+    - "+.stun.*.*"
+    - "+.turns.*.*"
+    - "+.help.netflix.com"
+    - "+.turn.*.*"
+    - stun.l.google.com
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+    - 114.114.114.114
+  fallback:
+    - 1.1.1.1
+    - 8.8.8.8
+    - 8.8.4.4
+    - 208.67.222.222
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    ipcidr:
+      - 240.0.0.0/4
+
+# ===== TUN 设置 =====
+tun:
+  enable: true
+  stack: system
+  dns-hijack:
+    - 8.8.8.8:53
+    - 8.8.4.4:53
+  auto-route: true
+  auto-detect-interface: true
+  # 排除内网和 NAS 域名（绕过 TUN）
+  exclude-ip-cidr:
+    - 192.168.0.0/16
+    - 10.0.0.0/8
+    - 172.16.0.0/12
+
+# ===== 代理节点 =====
+# 通过 proxy-providers 从 SubStore 订阅获取
+proxy-providers:
+  linkcube:
+    type: http
+    url: "https://api.linkcube.dev/sub?target=clash&emoji=true&tfo=true&udp=true&scv=true&filename=LinkCube&url=https%3A%2F%2Fapi-linkcube.dev%2Fsubscribe%2Fzavvx-qkuof1xa"
+    interval: 3600
+    path: ./proxy_providers/linkcube.yaml
+    health-check:
+      enable: true
+      interval: 300
+      url: http://www.gstatic.com/generate_204
+
+# ===== 代理 =====
+proxies:
+  # === 住宅 IP 链式代理（合并到 ISP 节点）===
+  # Mihomo 支持 dialer-proxy 实现链式代理：你 → 前置代理 → 住宅IP → 目标
+
+  # 香港链
+  - name: "🏠 ISP-香港链"
+    type: socks5
+    server: 223.29.144.254
+    port: 12324
+    username: huashan
+    password: qws052017283
+    dialer-proxy: "🇭🇰 香港节点"
+
+  # 美国链
+  - name: "🏠 ISP-美国链"
+    type: socks5
+    server: 223.29.144.254
+    port: 12324
+    username: huashan
+    password: qws052017283
+    dialer-proxy: "🇺🇲 美国节点"
+
+  # 日本链
+  - name: "🏠 ISP-日本链"
+    type: socks5
+    server: 223.29.144.254
+    port: 12324
+    username: huashan
+    password: qws052017283
+    dialer-proxy: "🇯🇵 日本节点"
+
+  # 新加坡链
+  - name: "🏠 ISP-新加坡链"
+    type: socks5
+    server: 223.29.144.254
+    port: 12324
+    username: huashan
+    password: qws052017283
+    dialer-proxy: "🇸🇬 狮城节点"
+
+  # 韩国链
+  - name: "🏠 ISP-韩国链"
+    type: socks5
+    server: 223.29.144.254
+    port: 12324
+    username: huashan
+    password: qws052017283
+    dialer-proxy: "🇰🇷 韩国节点"
+
+  # 台湾链
+  - name: "🏠 ISP-台湾链"
+    type: socks5
+    server: 223.29.144.254
+    port: 12324
+    username: huashan
+    password: qws052017283
+    dialer-proxy: "🇨🇳 台湾节点"
+
+  # 手动选择前置代理
+  - name: "🏠 ISP-手动链"
+    type: socks5
+    server: 223.29.144.254
+    port: 12324
+    username: huashan
+    password: qws052017283
+    dialer-proxy: "🚀 节点选择"
+
+  # 自动选择前置代理
+  - name: "🏠 ISP-自动链"
+    type: socks5
+    server: 223.29.144.254
+    port: 12324
+    username: huashan
+    password: qws052017283
+    dialer-proxy: "♻️ 自动选择"
+
+# ===== 代理组 =====
+proxy-groups:
+  # 基础代理组配置
+  - name: "🚀 节点选择"
+    type: select
+    proxies:
+      - "♻️ 自动选择"
+      - "🇭🇰 香港节点"
+      - "🇨🇳 台湾节点"
+      - "🇸🇬 狮城节点"
+      - "🇯🇵 日本节点"
+      - "🇺🇲 美国节点"
+      - "🇰🇷 韩国节点"
+      - "🌐 其他节点"
+      - "📶 ISP节点"
+      - DIRECT
+
+  - name: "🚀 手动切换"
+    type: select
+    use:
+      - linkcube
+
+  - name: "♻️ 自动选择"
+    type: url-test
+    use:
+      - linkcube
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+
+  # 自定义 huashan 分组
+  - name: "👨‍🎓 huashan"
+    type: select
+    proxies:
+      - "📶 ISP节点"
+      - "🚀 节点选择"
+      - "🇺🇲 美国节点"
+      - DIRECT
+
+  # 媒体分流组
+  - name: "📹 油管视频"
+    type: select
+    proxies:
+      - "🚀 节点选择"
+      - "♻️ 自动选择"
+      - "🇭🇰 香港节点"
+      - "🇨🇳 台湾节点"
+      - "🇸🇬 狮城节点"
+      - "🇯🇵 日本节点"
+      - "🇺🇲 美国节点"
+      - "🇰🇷 韩国节点"
+      - "🌐 其他节点"
+      - "📶 ISP节点"
+      - DIRECT
+
+  - name: "🎥 奈飞视频"
+    type: select
+    proxies:
+      - "🚀 节点选择"
+      - "🇸🇬 狮城节点"
+      - "🇭🇰 香港节点"
+      - "🇨🇳 台湾节点"
+      - "🇯🇵 日本节点"
+      - "🇺🇲 美国节点"
+      - "🇰🇷 韩国节点"
+      - "🌐 其他节点"
+      - "📶 ISP节点"
+      - DIRECT
+
+  - name: "🌍 国外媒体"
+    type: select
+    proxies:
+      - "🚀 节点选择"
+      - "♻️ 自动选择"
+      - "🇭🇰 香港节点"
+      - "🇨🇳 台湾节点"
+      - "🇸🇬 狮城节点"
+      - "🇯🇵 日本节点"
+      - "🇺🇲 美国节点"
+      - "🇰🇷 韩国节点"
+      - "🌐 其他节点"
+      - "📶 ISP节点"
+      - DIRECT
+
+  - name: "🌏 国内媒体"
+    type: select
+    proxies:
+      - DIRECT
+      - "🇭🇰 香港节点"
+      - "🇨🇳 台湾节点"
+      - "🇸🇬 狮城节点"
+      - "🇯🇵 日本节点"
+      - "🌐 其他节点"
+      - "📶 ISP节点"
+
+  # AI和工具服务
+  - name: "💬 OpenAi"
+    type: select
+    proxies:
+      - "📶 ISP节点"
+      - "🚀 节点选择"
+      - "♻️ 自动选择"
+      - "🇸🇬 狮城节点"
+      - "🇭🇰 香港节点"
+      - "🇨🇳 台湾节点"
+      - "🇯🇵 日本节点"
+      - "🇺🇲 美国节点"
+      - "🇰🇷 韩国节点"
+      - "🌐 其他节点"
+      - DIRECT
+
+  - name: "📢 谷歌FCM"
+    type: select
+    proxies:
+      - "📶 ISP节点"
+      - DIRECT
+      - "🚀 节点选择"
+      - "🇺🇲 美国节点"
+      - "🇭🇰 香港节点"
+      - "🇨🇳 台湾节点"
+      - "🇸🇬 狮城节点"
+      - "🇯🇵 日本节点"
+      - "🇰🇷 韩国节点"
+      - "🌐 其他节点"
+
+  - name: "Ⓜ️ 微软服务"
+    type: select
+    proxies:
+      - DIRECT
+      - "🚀 节点选择"
+      - "🇺🇲 美国节点"
+      - "🇭🇰 香港节点"
+      - "🇨🇳 台湾节点"
+      - "🇸🇬 狮城节点"
+      - "🇯🇵 日本节点"
+      - "🇰🇷 韩国节点"
+      - "🌐 其他节点"
+      - "📶 ISP节点"
+
+  - name: "🍎 苹果服务"
+    type: select
+    proxies:
+      - DIRECT
+      - "🚀 节点选择"
+      - "🇺🇲 美国节点"
+      - "🇭🇰 香港节点"
+      - "🇨🇳 台湾节点"
+      - "🇸🇬 狮城节点"
+      - "🇯🇵 日本节点"
+      - "🇰🇷 韩国节点"
+      - "🌐 其他节点"
+      - "📶 ISP节点"
+
+  - name: "🎮 游戏平台"
+    type: select
+    proxies:
+      - DIRECT
+      - "🚀 节点选择"
+      - "🇺🇲 美国节点"
+      - "🇭🇰 香港节点"
+      - "🇨🇳 台湾节点"
+      - "🇸🇬 狮城节点"
+      - "🇯🇵 日本节点"
+      - "🇰🇷 韩国节点"
+      - "🌐 其他节点"
+      - "📶 ISP节点"
+
+  - name: "💰 Crypto & Bet"
+    type: select
+    proxies:
+      - "🚀 节点选择"
+      - "♻️ 自动选择"
+      - "🇸🇬 狮城节点"
+      - "🇭🇰 香港节点"
+      - "🇨🇳 台湾节点"
+      - "🇯🇵 日本节点"
+      - "🇺🇲 美国节点"
+      - "🇰🇷 韩国节点"
+      - "🌐 其他节点"
+      - "📶 ISP节点"
+      - DIRECT
+
+  - name: "📞 talkatone"
+    type: select
+    proxies:
+      - "📶 ISP节点"
+      - "🚀 节点选择"
+      - "♻️ 自动选择"
+      - "🇺🇲 美国节点"
+      - "🇭🇰 香港节点"
+      - "🇨🇳 台湾节点"
+      - "🇸🇬 狮城节点"
+      - "🇯🇵 日本节点"
+      - "🇰🇷 韩国节点"
+      - "🌐 其他节点"
+      - DIRECT
+
+  - name: "🔍 谷歌搜索"
+    type: select
+    proxies:
+      - "📶 ISP节点"
+      - "🚀 节点选择"
+      - "♻️ 自动选择"
+      - "🇺🇲 美国节点"
+      - "🇭🇰 香港节点"
+      - "🇨🇳 台湾节点"
+      - "🇸🇬 狮城节点"
+      - "🇯🇵 日本节点"
+      - "🇰🇷 韩国节点"
+      - "🌐 其他节点"
+      - DIRECT
+
+  # 过滤和广告拦截
+  - name: "🎯 全球直连"
+    type: select
+    proxies:
+      - DIRECT
+      - "🚀 节点选择"
+      - "♻️ 自动选择"
+
+  - name: "🛑 广告拦截"
+    type: select
+    proxies:
+      - REJECT
+      - DIRECT
+
+  - name: "🐟 漏网之鱼"
+    type: select
+    proxies:
+      - "📶 ISP节点"
+      - "🚀 节点选择"
+      - "♻️ 自动选择"
+      - DIRECT
+      - "🇭🇰 香港节点"
+      - "🇨🇳 台湾节点"
+      - "🇸🇬 狮城节点"
+      - "🇯🇵 日本节点"
+      - "🇺🇲 美国节点"
+      - "🇰🇷 韩国节点"
+      - "🌐 其他节点"
+
+  # 自动节点分组（使用正则过滤）
+  - name: "🇭🇰 香港节点"
+    type: select
+    use:
+      - linkcube
+    filter: "(🇭🇰)|(港)|(Hong)|(HK)"
+
+  - name: "🇨🇳 台湾节点"
+    type: select
+    use:
+      - linkcube
+    filter: "(🇨🇳)|(台)|(Tai)|(TW)"
+
+  - name: "🇺🇲 美国节点"
+    type: select
+    use:
+      - linkcube
+    filter: "(🇺🇸)|(美)|(States)|(US)"
+
+  - name: "🇯🇵 日本节点"
+    type: select
+    use:
+      - linkcube
+    filter: "(🇯🇵)|(日)|(Japan)|(JP)"
+
+  - name: "🇸🇬 狮城节点"
+    type: select
+    use:
+      - linkcube
+    filter: "(🇸🇬)|(新)|(Singapore)|(SG)"
+
+  - name: "🇰🇷 韩国节点"
+    type: select
+    use:
+      - linkcube
+    filter: "(🇰🇷)|(韩)|(Korea)|(KR)"
+
+  # ISP节点：包含订阅ISP节点 + 住宅IP链式代理
+  - name: "📶 ISP节点"
+    type: url-test
+    proxies:
+      - "🏠 ISP-自动链"
+      - "🏠 ISP-香港链"
+      - "🏠 ISP-美国链"
+      - "🏠 ISP-日本链"
+      - "🏠 ISP-新加坡链"
+      - "🏠 ISP-韩国链"
+      - "🏠 ISP-台湾链"
+      - "🏠 ISP-手动链"
+    use:
+      - linkcube
+    filter: "(ISP)"
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+
+  - name: "🌐 其他节点"
+    type: select
+    use:
+      - linkcube
+    filter: "^((?!(🇭🇰|港|Hong|HK|🇨🇳|台|Tai|TW|🇸🇬|新|Singapore|SG|🇯🇵|日|Japan|JP|🇺🇸|美|States|US|🇰🇷|韩|Korea|KR)).)*$"
+
+# ===== 规则提供器 =====
+rule-providers:
+  pre-huashan:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/geekhuashan/Proxy-Rules/refs/heads/main/Clash/Provider/pre-huashan.yaml"
+    path: ./rule_providers/pre-huashan.yaml
+    interval: 86400
+
+  huashan:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/geekhuashan/Proxy-Rules/refs/heads/main/Clash/Provider/huashan.yaml"
+    path: ./rule_providers/huashan.yaml
+    interval: 86400
+
+  paypal:
+    type: http
+    behavior: classical
+    url: "https://testingcf.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/PayPal.yaml"
+    path: ./rule_providers/paypal.yaml
+    interval: 86400
+
+  ai-suite:
+    type: http
+    behavior: classical
+    url: "https://testingcf.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/AI%20Suite.yaml"
+    path: ./rule_providers/ai-suite.yaml
+    interval: 86400
+
+  google:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/geekhuashan/Proxy-Rules/refs/heads/main/Clash/Provider/Google.yaml"
+    path: ./rule_providers/google.yaml
+    interval: 86400
+
+  talkatone:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/geekhuashan/Proxy-Rules/refs/heads/main/Clash/Provider/Talkatone.yaml"
+    path: ./rule_providers/talkatone.yaml
+    interval: 86400
+
+  adblock:
+    type: http
+    behavior: classical
+    url: "https://testingcf.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Reject.yaml"
+    path: ./rule_providers/adblock.yaml
+    interval: 86400
+
+  netflix:
+    type: http
+    behavior: classical
+    url: "https://testingcf.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Netflix.yaml"
+    path: ./rule_providers/netflix.yaml
+    interval: 86400
+
+  youtube:
+    type: http
+    behavior: classical
+    url: "https://testingcf.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/YouTube.yaml"
+    path: ./rule_providers/youtube.yaml
+    interval: 86400
+
+  bilibili:
+    type: http
+    behavior: classical
+    url: "https://testingcf.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Bilibili.yaml"
+    path: ./rule_providers/bilibili.yaml
+    interval: 86400
+
+  apple-music:
+    type: http
+    behavior: classical
+    url: "https://testingcf.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Apple%20Music.yaml"
+    path: ./rule_providers/apple-music.yaml
+    interval: 86400
+
+  apple-news:
+    type: http
+    behavior: classical
+    url: "https://testingcf.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Apple%20News.yaml"
+    path: ./rule_providers/apple-news.yaml
+    interval: 86400
+
+  apple-tv:
+    type: http
+    behavior: classical
+    url: "https://testingcf.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Apple%20TV.yaml"
+    path: ./rule_providers/apple-tv.yaml
+    interval: 86400
+
+  apple:
+    type: http
+    behavior: classical
+    url: "https://testingcf.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Apple.yaml"
+    path: ./rule_providers/apple.yaml
+    interval: 86400
+
+  telegram:
+    type: http
+    behavior: classical
+    url: "https://testingcf.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Telegram.yaml"
+    path: ./rule_providers/telegram.yaml
+    interval: 86400
+
+  crypto:
+    type: http
+    behavior: classical
+    url: "https://testingcf.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Crypto.yaml"
+    path: ./rule_providers/crypto.yaml
+    interval: 86400
+
+  bet:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/geekhuashan/Proxy-Rules/refs/heads/main/Clash/Provider/Bet.yaml"
+    path: ./rule_providers/bet.yaml
+    interval: 86400
+
+  discord:
+    type: http
+    behavior: classical
+    url: "https://testingcf.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Discord.yaml"
+    path: ./rule_providers/discord.yaml
+    interval: 86400
+
+  google-fcm:
+    type: http
+    behavior: classical
+    url: "https://testingcf.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Google%20FCM.yaml"
+    path: ./rule_providers/google-fcm.yaml
+    interval: 86400
+
+  microsoft:
+    type: http
+    behavior: classical
+    url: "https://testingcf.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Microsoft.yaml"
+    path: ./rule_providers/microsoft.yaml
+    interval: 86400
+
+  scholar:
+    type: http
+    behavior: classical
+    url: "https://testingcf.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Scholar.yaml"
+    path: ./rule_providers/scholar.yaml
+    interval: 86400
+
+  speedtest:
+    type: http
+    behavior: classical
+    url: "https://testingcf.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Speedtest.yaml"
+    path: ./rule_providers/speedtest.yaml
+    interval: 86400
+
+  steam:
+    type: http
+    behavior: classical
+    url: "https://testingcf.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Steam.yaml"
+    path: ./rule_providers/steam.yaml
+    interval: 86400
+
+  proxy:
+    type: http
+    behavior: classical
+    url: "https://testingcf.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Proxy.yaml"
+    path: ./rule_providers/proxy.yaml
+    interval: 86400
+
+  domestic:
+    type: http
+    behavior: classical
+    url: "https://testingcf.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Domestic.yaml"
+    path: ./rule_providers/domestic.yaml
+    interval: 86400
+
+  domestic-ips:
+    type: http
+    behavior: classical
+    url: "https://testingcf.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Domestic%20IPs.yaml"
+    path: ./rule_providers/domestic-ips.yaml
+    interval: 86400
+
+  emby:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/geekhuashan/Proxy-Rules/refs/heads/main/Clash/Provider/emby.yaml"
+    path: ./rule_providers/emby.yaml
+    interval: 86400
+
+# ===== 规则 =====
+rules:
+  # ========== VPS 直连(最高优先级) ==========
+  - IP-CIDR,101.132.148.140/32,DIRECT,no-resolve
+
+  # ========== huaikhwang.central-world.org 直连 ==========
+  - DOMAIN,huaikhwang.central-world.org,DIRECT
+  - DOMAIN-SUFFIX,central-world.org,DIRECT
+  - DOMAIN-KEYWORD,central-world,DIRECT
+  - IP-CIDR,65.75.223.0/24,DIRECT,no-resolve
+  - IP-CIDR,108.165.170.0/24,DIRECT,no-resolve
+  - IP-CIDR,114.28.137.0/24,DIRECT,no-resolve
+  - IP-CIDR,154.12.54.0/24,DIRECT,no-resolve
+
+  # ========== 订阅服务直连 ==========
+  - DOMAIN-SUFFIX,linkcube.dev,DIRECT
+  - DOMAIN-SUFFIX,api-linkcube.dev,DIRECT
+  - DOMAIN-SUFFIX,dler.cloud,DIRECT
+  - DOMAIN,dler.cloud,DIRECT
+  - DOMAIN-SUFFIX,geekhuashan.cn,DIRECT
+  - DOMAIN,sub.geekhuashan.cn,DIRECT
+  - DOMAIN-SUFFIX,nobodys.uk,DIRECT
+  - DOMAIN-SUFFIX,parkson-market.org,DIRECT
+  - DOMAIN-SUFFIX,aihubmix.com,DIRECT
+
+  # ========== 本地直连 ==========
+  - DOMAIN-SUFFIX,tailscale.com,DIRECT
+  - DOMAIN-SUFFIX,tailscale.io,DIRECT
+  - DOMAIN-SUFFIX,ipn.dev,DIRECT
+  - IP-CIDR6,fd7a:115c:a1e0::/48,DIRECT,no-resolve
+  - IP-CIDR,127.0.0.1/32,DIRECT,no-resolve
+
+  # ========== Meta/Facebook 专属规则 ==========
+  - DOMAIN-SUFFIX,meta.com,👨‍🎓 huashan
+  - DOMAIN-SUFFIX,facebook.com,👨‍🎓 huashan
+  - DOMAIN-SUFFIX,fbcdn.net,👨‍🎓 huashan
+  - DOMAIN-SUFFIX,oculus.com,👨‍🎓 huashan
+  - DOMAIN-SUFFIX,instagram.com,👨‍🎓 huashan
+  - DOMAIN-SUFFIX,whatsapp.com,👨‍🎓 huashan
+  - DOMAIN-SUFFIX,ray-ban.com,👨‍🎓 huashan
+  # IP-ASN 规则（Clash 中使用 GEOIP 或 IP-CIDR 替代）
+
+  # ========== Google/YouTube 规则 ==========
+  - DOMAIN-SUFFIX,youtube.com,📹 油管视频
+  - DOMAIN-SUFFIX,googlevideo.com,📹 油管视频
+  - DOMAIN-SUFFIX,ytimg.com,📹 油管视频
+  - DOMAIN-SUFFIX,ggpht.com,📹 油管视频
+  - DOMAIN-SUFFIX,google.com,🔍 谷歌搜索
+  - DOMAIN-SUFFIX,googleapis.com,🔍 谷歌搜索
+  - DOMAIN-SUFFIX,googleusercontent.com,🔍 谷歌搜索
+  - DOMAIN-SUFFIX,gstatic.com,🔍 谷歌搜索
+  - DOMAIN-SUFFIX,gmail.com,🔍 谷歌搜索
+  - DOMAIN-SUFFIX,gvt1.com,🔍 谷歌搜索
+
+  # ⚠️ 强制所有代理流量的 QUIC 走代理（Mihomo 支持 NETWORK 规则）
+  - NETWORK,udp,🚀 节点选择,dst-port:443
+
+  # ========== 规则提供器 ==========
+  - RULE-SET,pre-huashan,🚀 节点选择
+  - RULE-SET,huashan,👨‍🎓 huashan
+  - RULE-SET,paypal,👨‍🎓 huashan
+  - RULE-SET,ai-suite,💬 OpenAi
+  - RULE-SET,google,🔍 谷歌搜索
+  - RULE-SET,talkatone,📞 talkatone
+  - RULE-SET,adblock,🛑 广告拦截
+  - RULE-SET,netflix,🎥 奈飞视频
+  - RULE-SET,youtube,📹 油管视频
+  - RULE-SET,bilibili,🌏 国内媒体
+  - RULE-SET,apple-music,🍎 苹果服务
+  - RULE-SET,apple-news,🍎 苹果服务
+  - RULE-SET,apple-tv,🍎 苹果服务
+  - RULE-SET,apple,🍎 苹果服务
+  - RULE-SET,telegram,🚀 节点选择
+  - RULE-SET,crypto,💰 Crypto & Bet
+  - RULE-SET,bet,💰 Crypto & Bet
+  - RULE-SET,discord,🚀 节点选择
+  - RULE-SET,google-fcm,📢 谷歌FCM
+  - RULE-SET,microsoft,Ⓜ️ 微软服务
+  - RULE-SET,scholar,🚀 节点选择
+  - RULE-SET,speedtest,🚀 节点选择
+  - RULE-SET,steam,🎮 游戏平台
+  - RULE-SET,proxy,🚀 节点选择
+  - RULE-SET,domestic,🎯 全球直连
+  - RULE-SET,domestic-ips,🎯 全球直连
+  - RULE-SET,emby,🌍 国外媒体
+
+  # ========== 局域网规则 ==========
+  - DOMAIN-SUFFIX,local,DIRECT
+  - IP-CIDR,101.132.148.140/32,DIRECT,no-resolve
+  - IP-CIDR,192.168.71.0/24,DIRECT,no-resolve
+  - IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
+  - IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
+  - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
+  - IP-CIDR,192.168.122.1/32,DIRECT,no-resolve
+  - IP-CIDR,193.168.0.1/32,DIRECT,no-resolve
+
+  # Tailscale 专用规则
+  - IP-CIDR,100.64.0.0/10,DIRECT,no-resolve
+
+  # ========== 地理位置和兜底规则 ==========
+  - GEOIP,LAN,DIRECT
+  - GEOIP,CN,🎯 全球直连
+  - MATCH,🐟 漏网之鱼
